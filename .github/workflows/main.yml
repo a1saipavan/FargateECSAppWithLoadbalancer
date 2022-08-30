@@ -1,33 +1,61 @@
-name: database
+name: Deploy to App Runner - Image based  Name of the workflow
 on:
   push:
     branches: [ mainline ] # Trigger workflow on git push to main branch
   workflow_dispatch: # Allow manual invocation of the workflow
-jobs:
-  ci:
+jobs:  
+  deploy:
     runs-on: ubuntu-latest
- 
-    services:
-      mysql-master:
-        image: mysql:8.0
-        ports:
-          - 3306/tcp
+    
+    steps:      
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+    
+          
+      - name: Configure AWS credentials
+        id: aws-credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}     
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1        
+      
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
         env:
-          MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
-          MYSQL_USER: ${{ env.MYSQL_USER }}
-          MYSQL_PASSWORD: ${{ env.MYSQL_PASSWORD }}
-          MYSQL_HOST: ${{ env.MYSQL_HOST }}
-        options: >-
-          --name=mysql-master
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-            steps:
-               - uses: actions/checkout@v2
-               - name: Install packages
-                 run: "npm ci"
-               - name: Setup Database
-                 run: "npm run Migrations/Scripts"
-              -  name: Run Tests
-                 run: "npm run test"
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: database
+          IMAGE_TAG: ${{ github.sha }}
+        
+        run: |
+        
+          docker build -t $DB_HOST/$DB_NAME:$DB_USERNAME/$DB_PASSWORD $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          
+      - name: Deploy to App Runner
+        id: deploy-apprunner
+        uses: awslabs/amazon-app-runner-deploy@main        
+        with:
+          service: runner
+          image: ${{ steps.build-image.outputs.image }}          
+          access-role-arn: ${{ secrets.ROLE_ARN }}
+          runtime: NODEJS_12          
+          region: ${{ secrets.AWS_REGION }}
+          cpu : 1
+          memory : 2
+          port: 8081
+          wait-for-service-stability: true
+      
+      - name: App Runner output
+        run: echo "App runner output ${{ steps.deploy-apprunner.outputs.service-id }}"    
