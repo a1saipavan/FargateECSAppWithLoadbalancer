@@ -4,7 +4,7 @@ on:
     branches: [ mainline ] # Trigger workflow on git push to main branch
   workflow_dispatch: # Allow manual invocation of the workflow
 jobs:
-  deploy:
+  ci:
     runs-on: ubuntu-latest
  
     services:
