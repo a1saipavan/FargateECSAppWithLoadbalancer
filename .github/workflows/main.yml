@@ -5,9 +5,9 @@ on:
   workflow_dispatch: # Allow manual invocation of the workflow
 jobs:
   deploy:
-   runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
  
-   services:
+    services:
       mysql-master:
         image: mysql:8.0
         ports:
