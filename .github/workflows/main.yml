@@ -1,7 +1,5 @@
-name: Mysql Service Example
-on: 
-  push:
-    branches: [ mainline ]
+name: PostgreSQL Service Example
+on: push
 
 jobs:
   # Label of the runner job
@@ -14,19 +12,19 @@ jobs:
       # Label used to access the service container
       postgres:
         # Docker Hub image
-        image: mysql
+        image: postgres
         # Provide the password for postgres
         env:
-          MYSQL_ROOT_PASSWORD: admin1234
+          POSTGRES_PASSWORD: postgres1234
         # Set health checks to wait until postgres has started
         options: >-
-          --health-cmd mysql_isready
+          --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
         ports:
           # Maps tcp port 5432 on service container to the host
-          - 3306:3306
+          - 5432:5432
 
     steps:
       # Downloads a copy of the code in your repository before running CI tests
@@ -46,7 +44,6 @@ jobs:
         # a new PostgreSQL table.
         env:
           # The hostname used to communicate with the PostgreSQL service container
-          MYSQL_HOST: database-2.cluster-ro-cnueudck5tkx.us-east-1.rds.amazonaws.com
+          POSTGRES_HOST: database-1.cluster-ro-cnueudck5tkx.us-east-1.rds.amazonaws.com
           # The default PostgreSQL port
-          MYSQL_PORT: 3306
-          
+          POSTGRES_PORT: 5432
