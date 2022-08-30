@@ -6,8 +6,7 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    container:
-      image: node:14.5.0-alpine
+  
     services:
       mysql-master:
         image: mysql:8.0
@@ -29,6 +28,6 @@ jobs:
           - name: Install packages
             run: "npm ci"
           - name: Setup Database
-            run: "npm run migrations"
+            run: "npm run Migrations/Scripts"
           - name: Run Tests
             run: "npm run test"
