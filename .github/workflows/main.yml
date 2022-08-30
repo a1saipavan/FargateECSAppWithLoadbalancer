@@ -17,10 +17,10 @@ jobs:
         image: mysql
         # Provide the password for postgres
         env:
-          MYSQL_PASSWORD: admin1234
+          MYSQL_ROOT_PASSWORD: admin1234
         # Set health checks to wait until postgres has started
         options: >-
-          --health-cmd pg_isready
+          --health-cmd mysql_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -49,3 +49,4 @@ jobs:
           MYSQL_HOST: database-2.cluster-ro-cnueudck5tkx.us-east-1.rds.amazonaws.com
           # The default PostgreSQL port
           MYSQL_PORT: 3306
+          
