@@ -54,7 +54,7 @@ jobs:
           region: ${{ secrets.AWS_REGION }}
           cpu : 1
           memory : 2
-          port: 8080
+          port: 8081
           wait-for-service-stability: true
       
       - name: App Runner output
