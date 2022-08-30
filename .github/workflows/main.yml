@@ -4,10 +4,10 @@ on:
     branches: [ mainline ] # Trigger workflow on git push to main branch
   workflow_dispatch: # Allow manual invocation of the workflow
 jobs:
-  ci:
-    runs-on: ubuntu-latest
-  
-    services:
+  deploy:
+   runs-on: ubuntu-latest
+ 
+   services:
       mysql-master:
         image: mysql:8.0
         ports:
@@ -23,11 +23,11 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=3
-    steps:
-          - uses: actions/checkout@v2
-          - name: Install packages
-            run: "npm ci"
-          - name: Setup Database
-            run: "npm run Migrations/Scripts"
-          - name: Run Tests
-            run: "npm run test"
+            steps:
+               - uses: actions/checkout@v2
+               - name: Install packages
+                 run: "npm ci"
+               - name: Setup Database
+                 run: "npm run Migrations/Scripts"
+              -  name: Run Tests
+                 run: "npm run test"
