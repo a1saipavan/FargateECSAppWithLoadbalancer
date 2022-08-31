@@ -34,14 +34,15 @@ jobs:
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Install dependencies
-        run: sudo apt-get -y install net-tools
+        run: npm install npm@5
+        
       - name: Connect to PostgreSQL
     # Runs a script that creates a PostgreSQL table, populates
     # the table with data, and then retrieves the data
-        run: chmod +x postgres.sql && source postgres.sql
+        run: source postgres.sql
 
         env:
       # The hostname used to communicate with the PostgreSQL service container
-          POSTGRES_HOST: localhost:5432
+          POSTGRES_HOST: database-2.cnueudck5tkx.us-east-1.rds.amazonaws.com
       # The default PostgreSQL port
           POSTGRES_PORT: 5432
