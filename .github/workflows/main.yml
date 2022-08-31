@@ -6,7 +6,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:9.6-alpine@sha256:379b867aca59dc4ee8d0739b5d593dcd9693ae76c253a0c4e367a080d1d00ccc
+        image: postgres
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres1234
