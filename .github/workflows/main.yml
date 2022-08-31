@@ -39,7 +39,7 @@ jobs:
       - name: Connect to PostgreSQL
     # Runs a script that creates a PostgreSQL table, populates
     # the table with data, and then retrieves the data
-        run: sudo service postgresql restart && source postgres.sql && cat /var/run/postgresql/.s.PGSQL.5432
+        run: source postgres.sql
 
         env:
       # The hostname used to communicate with the PostgreSQL service container
