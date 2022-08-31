@@ -1,1 +1,1 @@
-CREATE TABLE test ;
+createdb mysql;
