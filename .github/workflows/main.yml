@@ -44,6 +44,6 @@ jobs:
         # a new PostgreSQL table.
         env:
           # The hostname used to communicate with the PostgreSQL service container
-          POSTGRES_HOST: localhost
+          POSTGRES_HOST: database-1.cluster-ro-cnueudck5tkx.us-east-1.rds.amazonaws.com
           # The default PostgreSQL port
           POSTGRES_PORT: 5432
