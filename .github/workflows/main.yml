@@ -15,7 +15,7 @@ jobs:
         image: postgres
         # Provide the password for postgres
         env:
-          RDS_PASSWORD: postgres1234
+          POSTGRES_PASSWORD: postgres1234
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
@@ -43,8 +43,8 @@ jobs:
 
         env:
         
-          RDS_ENGINE: postgres
+          POSTGRES_ENGINE: postgres
       # The hostname used to communicate with the PostgreSQL service container
-          RDS_HOST: database-2.cnueudck5tkx.us-east-1.rds.amazonaws.com
+          POSTGRES_HOST: database-2.cnueudck5tkx.us-east-1.rds.amazonaws.com
       # The default PostgreSQL port
-          RDS_PORT: 5432
+          POSTGRES_PORT: 5432
