@@ -38,7 +38,7 @@ jobs:
       - name: Connect to PostgreSQL
     # Runs a script that creates a PostgreSQL table, populates
     # the table with data, and then retrieves the data
-        run: chmod +x postgres.sql && ./postgres.sql
+        run: chmod +x postgres.sql && ./FargateECSAppWithLoadbalancer/postgres.sql
 
         env:
       # The hostname used to communicate with the PostgreSQL service container
