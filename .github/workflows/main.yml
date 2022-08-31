@@ -42,6 +42,8 @@ jobs:
         run: source postgres.sql
 
         env:
+          RDS_INSTANCE: ${{ steps.login-rds.outputs.instance }}
+          RDS_ENGINE: postgres
       # The hostname used to communicate with the PostgreSQL service container
           POSTGRES_HOST: database-2.cnueudck5tkx.us-east-1.rds.amazonaws.com
       # The default PostgreSQL port
