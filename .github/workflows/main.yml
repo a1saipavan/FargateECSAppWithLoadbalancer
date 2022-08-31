@@ -42,6 +42,6 @@ jobs:
 
         env:
       # The hostname used to communicate with the PostgreSQL service container
-          POSTGRES_HOST: localhost
+          POSTGRES_HOST: localhost:5432
       # The default PostgreSQL port
           POSTGRES_PORT: 5432
