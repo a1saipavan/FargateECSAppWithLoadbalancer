@@ -1,1 +1,2 @@
-CREATE DATABASE testDB;
+CREATE TABLE test (test VARCHAR(255));
+INSERT INTO test VALUES(\'test\')
