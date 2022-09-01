@@ -39,7 +39,7 @@ jobs:
       - name: Connect to PostgreSQL
     # Runs a script that creates a PostgreSQL table, populates
     # the table with data, and then retrieves the data
-        run: sudo cat /etc/conf.d/postgres && sudo cat /usr/lib/systemd/system/postgresql.service && source postgres.sql
+        run: sudo mkdir /etc/conf.d/postgres && sudo cat /usr/lib/systemd/system/postgresql.service && source postgres.sql
 
         env:
         
