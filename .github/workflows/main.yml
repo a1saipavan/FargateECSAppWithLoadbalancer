@@ -39,12 +39,12 @@ jobs:
       - name: Connect to PostgreSQL
     # Runs a script that creates a PostgreSQL table, populates
     # the table with data, and then retrieves the data
-        run: systemctl start postgresql.service && source postgres.sql
+        run: systemctl status postgresql.service && source postgres.sql
 
         env:
         
           POSTGRES_ENGINE: postgres
       # The hostname used to communicate with the PostgreSQL service container
-          POSTGRES_HOST: database-2.cnueudck5tkx.us-east-1.rds.amazonaws.com
+          POSTGRES_HOST: localhost
       # The default PostgreSQL port
           POSTGRES_PORT: 5432
