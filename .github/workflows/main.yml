@@ -39,7 +39,7 @@ jobs:
       - name: Connect to PostgreSQL
     # Runs a script that creates a PostgreSQL table, populates
     # the table with data, and then retrieves the data
-        run: service postgresql.service restart && source postgres.sql
+        run: mkdir /var/lib/postgres/data && source postgres.sql
 
         env:
         
