@@ -39,7 +39,7 @@ jobs:
       - name: Connect to PostgreSQL
     # Runs a script that creates a PostgreSQL table, populates
     # the table with data, and then retrieves the data
-        run: source postgres.sql
+        run: ll && systemctl service postgresql && source postgres.sql
 
         env:
         
