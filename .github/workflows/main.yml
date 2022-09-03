@@ -30,8 +30,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1     
     - run: npm install npm@5
-      working-directory: ./
-    - run: source Migrations/Scripts/mysql.sql
+      working-directory: ./Migrations/Scripts/
+    - run: source mysql.sql
       working-directory: ./
       env:
         # use postgres for the host here because we have specified a container for the job.
