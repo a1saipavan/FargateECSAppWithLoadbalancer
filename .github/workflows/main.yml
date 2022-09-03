@@ -31,7 +31,7 @@ jobs:
     - uses: actions/checkout@v1     
     - run: npm install npm@5
       working-directory: ./
-    - run: node client.js
+    - run: source postgres.sql
       working-directory: ./
       env:
         # use postgres for the host here because we have specified a container for the job.
