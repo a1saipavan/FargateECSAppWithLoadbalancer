@@ -30,9 +30,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1     
     - run: npm install npm@5
-      working-directory: ./FargateECSAppWithLoadbalancer
+      working-directory: ./
     - run: node client.js
-      working-directory: ./FargateECSAppWithLoadbalancer
+      working-directory: ./
       env:
         # use postgres for the host here because we have specified a container for the job.
         # If we were running the job on the VM this would be localhost
