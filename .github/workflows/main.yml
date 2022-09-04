@@ -32,7 +32,6 @@ jobs:
     - run: npm install npm@5
       working-directory: ./Migrations/Scripts/
     - run:  psql -d postgres -a -f mysql.sql
-      
       env:
         # use postgres for the host here because we have specified a container for the job.
         # If we were running the job on the VM this would be localhost
