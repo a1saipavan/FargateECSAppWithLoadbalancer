@@ -28,8 +28,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1     
     - run: npm install npm@5
-      working-directory: ./Migrations/Scripts/
     - run:  sudo su - postgres
+      working-directory: ./Migrations/Scripts/
+    
     - run:  psql -d postgres -a -f mysql.sql
     
       
