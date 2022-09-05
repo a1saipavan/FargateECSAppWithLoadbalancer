@@ -28,6 +28,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1     
     - run: npm install npm@5
+    - run: sudo -i
+    - run: cd FargateECSAppWithLoadbalancer/
     - run:  sudo su - postgres
     - run: sudo netstat -nlp | grep 5432
     
